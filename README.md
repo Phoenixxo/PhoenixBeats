@@ -10,7 +10,7 @@ You are free to use this bot, however, anything that happens is not my responsib
 
 <div align="center"> <h1> WARNING!</h1> 
 
-<p>This bot has many errors left to fix still and is an early stage! </p>
+<p> This bot has many errors left to fix still and is still in an early stage! </p>
 </div>
 # Requirements 
 
