@@ -1,0 +1,6 @@
+discord.py[voice]==1.7.3
+python-dotenv==0.19.0
+youtube-dl==2021.06.06
+pafy==0.5.5
+PyNaCl==1.4.0
+ffmpeg==1.4
