@@ -16,7 +16,7 @@ You are free to use this bot, however, anything that happens is not my responsib
 
 Must have **Python 3.7** or higher.
 
-There is requirements file I have setup so in the terminal all you have to run is:
+There is a requirements file I have setup so in the terminal all you have to run is:
 
 ```
 pip3 install -r requirements.txt
