@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 from discord.ext.commands import bot
 import youtube_dl
 import pafy
@@ -173,7 +174,7 @@ class Player(commands.Cog):
 
         poll_msg = await ctx.channel.fetch_message(poll_id)
 
-        votes = {"\u2705": 0, "\U0001F6AB": 0}
+        votes = {"\u2705": 0, "\U000F16AB": 0}
         reacted = []
 
         for reaction in poll_msg.reactions:
@@ -216,6 +217,29 @@ class Player(commands.Cog):
 
         if skip:
             ctx.voice_client.stop()
+
+    @commands.command()
+    async def fskip(self, ctx):
+        if ctx.voice_client is None:
+            ctx.send("I am not currently playing a song.")
+
+        if ctx.author.voice.channel.id != ctx.voice_client.channel.id:
+            ctx.send("I am not playing any songs for you.")
+
+        if ctx.author.voice is None:
+            ctx.send("I am currently not connected to a voice channel.")
+
+        if ctx.author.guild_permissions.administrator == True:
+            ctx.voice_client.stop()
+            message = discord.Embed(
+                title="Song Force Skipped",
+                description=f"**The current song has been successfully force skipped by: {ctx.author.name}.** :white_check_mark:",
+                color=discord.Color.green(),
+            )
+            message.timestamp = datetime.datetime.utcnow()
+            await ctx.send(embed=message)
+        else:
+            await ctx.send("You do not have permission to run this command.")
 
     @commands.command()
     async def pause(self, ctx):
