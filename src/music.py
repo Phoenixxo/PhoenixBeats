@@ -36,6 +36,7 @@ class Player(commands.Cog):
                 f"ytsearch{amount}:{song}", download=False, ie_key="YoutubeSearch"
             ),
         )
+
         if len(info["entries"]) == 0:
             return None
 
@@ -48,18 +49,6 @@ class Player(commands.Cog):
             after=lambda error: self.bot.loop.create_task(self.check_queue(ctx)),
         )
         ctx.voice_client.source.volume = 0.5
-
-    @commands.command()
-    async def join(self, ctx):
-        if ctx.author.voice is None:
-            return await ctx.send(
-                "You are not connected to a voice channel, please connect to the channel you want the bot to join."
-            )
-
-        if ctx.voice_client is not None:
-            await ctx.voice_client.disconnect()
-
-        await ctx.author.voice.channel.connect()
 
     @commands.command()
     async def leave(self, ctx):
@@ -132,13 +121,17 @@ class Player(commands.Cog):
         if len(self.song_queue[ctx.guild.id]) == 0:
             return await ctx.send("There are currently no songs in the queue.")
 
+        song = list(self.song_queue[ctx.guild.id])
+        info = self.search_song(len(self.song_queue[ctx.guild.id]), song)
+
         embed = discord.Embed(
             title="Song Queue", description="", color=discord.Color.dark_gold()
         )
 
+        info = await info.get("title", None)
         i = 1
         for url in self.song_queue[ctx.guild.id]:
-            embed.description += f"{i}) {url}\n"
+            embed.description += f"{i}) {info}\n"
             i += 1
 
         embed.set_footer(text="Thanks for using my bot! - <3Phoenix#9996")

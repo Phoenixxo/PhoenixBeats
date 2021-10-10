@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from music import Player
+from cogs.musicCogs.join import Join
 
 
 load_dotenv()
@@ -22,6 +23,7 @@ async def on_ready():
 async def setup():
     await bot.wait_until_ready()
     bot.add_cog(Player(bot))
+    bot.add_cog(Join(bot))
 
 
 bot.loop.create_task(setup())
