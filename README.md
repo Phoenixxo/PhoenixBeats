@@ -12,6 +12,7 @@ You are free to use this bot, however, anything that happens is not my responsib
 
 <p> This bot has many errors left to fix still and is still in an early stage! </p>
 </div>
+
 # Requirements 
 
 Must have **Python 3.7** or higher.
