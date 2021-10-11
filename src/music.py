@@ -86,8 +86,6 @@ class Player(commands.Cog):
         await self.play_song(ctx, song)
         await ctx.send(f"Now playing: {song}")
 
-    
-
     @commands.command()
     async def queue(self, ctx):  # Display the current queue for the guild
         if len(self.song_queue[ctx.guild.id]) == 0:
