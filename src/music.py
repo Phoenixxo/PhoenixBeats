@@ -51,13 +51,6 @@ class Player(commands.Cog):
         ctx.voice_client.source.volume = 0.5
 
     @commands.command()
-    async def leave(self, ctx):
-        if ctx.voice_client is not None:
-            return await ctx.voice_client.disconnect()
-        else:
-            await ctx.send("I am not in a voice channel.")
-
-    @commands.command()
     async def play(self, ctx, *, song=None):
         if song is None:
             return await ctx.send("You must include a song to play.")
@@ -93,28 +86,7 @@ class Player(commands.Cog):
         await self.play_song(ctx, song)
         await ctx.send(f"Now playing: {song}")
 
-    @commands.command()
-    async def search(self, ctx, *, song=None):
-        if song is None:
-            return await ctx.send("You forgot to include your song.")
-
-        await ctx.send("Searching for song...")
-
-        info = await self.search_song(5, song)
-
-        embed = discord.Embed(
-            title=f"Results for '{song}':",
-            description="*You can use these exact URLs to play a song if the one you want isn't the first result.*\n",
-            color=discord.Color.red(),
-        )
-
-        amount = 0
-        for entry in info["entries"]:
-            embed.description += f"[{entry['title']}]({entry['webpage_url']})\n"
-            amount += 1
-
-        embed.set_footer(text=f"Displaying the first {amount} results.")
-        await ctx.send(embed=embed)
+    
 
     @commands.command()
     async def queue(self, ctx):  # Display the current queue for the guild

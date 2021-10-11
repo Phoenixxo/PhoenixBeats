@@ -18,3 +18,4 @@ class Join(commands.Cog):
             await ctx.voice_client.disconnect()
 
         await ctx.author.voice.channel.connect()
+        print("[ ✓ ] Join command successfully executed!")
