@@ -1,7 +1,7 @@
 import datetime
 import discord
 from discord.ext import commands
-from music import Player
+from utils import Utils
 
 
 class Search(commands.Cog):
@@ -15,7 +15,7 @@ class Search(commands.Cog):
 
         await ctx.send("Searching for song...")
 
-        info = await Player.search_song(self, 5, song)
+        info = await Utils.search_song(self, 5, song)
 
         embed = discord.Embed(
             title=f"Results for '{song}':",
